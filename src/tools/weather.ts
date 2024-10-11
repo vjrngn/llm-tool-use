@@ -2,17 +2,16 @@
  * This module defines the functions that will be used as tools.
  */
 
-import {callWeatherApi, weatherApi} from "../weather-map-http-client";
+import {callWeatherApi, getGeoLocation} from "../weather-http-client";
 
 /**
  * Returns the lat and lon of a city
  * @param city The city to get the coordinates for
  */
 export async function getCityCoordinates(city: string) {
-  const response = await weatherApi.get(`/geo/1.0/direct?q=${city}`);
-  const { data } = response;
+  const response = await getGeoLocation(city);
 
-  const { lat, lon } = data[0];
+  const { lat, lon } = response;
   return { lat, lon };
 }
 
